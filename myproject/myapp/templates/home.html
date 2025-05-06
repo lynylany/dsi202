@@ -1,0 +1,108 @@
+<!-- หน้าแรก homepage rent near tu -->
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <!-- ข้อมูลพื้นฐานเว็บไซต์ -->
+    <meta charset="UTF-8">
+    <meta name = "viewpoint" content = "width = deviice-width, initial-scale = 1.0">
+    <meta name = "description" content = "แอปค้นหาหอให้เช่าที่ใกล้ฉันมากที่สุด ที่ราคาถูกแต่เฟอร์นิเจอร์ครบครัน">
+    <meta name = "keyword" content = "หอพักใกล้ฉัน">
+    <meta name ="author" content = "Thamonwan Theeratchaikul">
+    <title>Home Page Rent Near TU</title>
+
+    <!-- Google Fonts: Noto Sans Thai -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Noto Sans Thai, sans-serif;
+            background-color: #f6f8f9;
+        }
+        header {
+            background-color: #ccc;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Menu icon -->
+    <header>
+        <div>Home Page</div>
+        <div class="menu-icon">&#9776;</div> <!-- hamburger menu -->
+    </header>
+
+    <!-- Search tab -->
+    <form action="{% url 'search_results' %}" method="get" class="search-form">
+        <input type="text" name="q" placeholder="ค้นหาห้องพัก..." class="search-input">
+        <button type="submit" class="search-button">ค้นหา</button>
+      </form>      
+
+    <!-- Filter bar -->
+    <div class="flex flex-wrap gap-2 justify-center px-4 py-4 bg-gray-100">
+        <select class="px-4 py-2 rounded bg-white shadow">
+            <option>ราคา</option>
+            <option>ต่ำ-สูง</option>
+            <option>สูง-ต่ำ</option>
+        </select>
+        <select class="px-4 py-2 rounded bg-white shadow">
+            <option>เฟอร์นิเจอร์</option>
+            <option>มี</option>
+            <option>ไม่มี</option>
+        </select>
+        <select class="px-4 py-2 rounded bg-white shadow">
+            <option>สิ่งอำนวยความสะดวก</option>
+            <option>น้อยไปมาก</option>
+            <option>มากไปน้อย</option>
+        </select>
+        <select class="px-4 py-2 rounded bg-white shadow">
+            <option>พื้นที่ใช้สอย</option>
+        </select>
+    </div>
+
+    <!-- หอพักแนะนำ tab -->
+    <h2 class="text-xl font-semibold mt-6 mb-2">หอพักแนะนำ</h2>
+    <p class="text-sm text-gray-500 mb-4">ห้องที่แนะนำสำหรับคุณ</p>
+
+    <div class="space-y-4">
+        {% for room in featured_rooms %}
+            <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
+                <img src="https://via.placeholder.com/100" alt="room image" class="w-24 h-24 object-cover rounded-md">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold">{{ room.name }}</h3>
+                    <p class="text-sm text-gray-600">
+                        {{ room.location }} • ขนาด {{ room.size }} ตร.ม. • {{ room.furniture|truncatechars:30 }}
+                    </p>
+                    <p class="text-green-600 font-bold mt-1">{{ room.price }} บาท/เดือน</p>
+                    <a href="{% url 'room_detail' room.id %}" class="mt-2 inline-block text-sm text-white bg-green-500 px-3 py-1 rounded hover:bg-green-600">
+                        ดูเพิ่มเติม
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer (Facebook-like light gray) -->
+    <footer class="bg-gray-100 text-gray-600 p-4 mt-6">
+        <div class="container mx-auto text-center">
+            <p>© 2568 แอป Rent near tu. สงวนลิขสิทธิ์ทั้งหมด.</p>
+        </div>
+    </footer>
+</body>
+</html>

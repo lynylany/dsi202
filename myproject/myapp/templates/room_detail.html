@@ -1,0 +1,16 @@
+{% extends 'myapp/home.html' %}
+{% block title %}{{ room.name }} Details{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ bike.name }}</h1>
+    <div class="bg-white p-6 rounded shadow">
+        <p class="text-lg text-gray-700"><strong>Hourly Rate:</strong> ${{ room.hourly_rate }}</p>
+        <p class="text-lg text-gray-700"><strong>Available:</strong> {% if room.is_available %}<span class="text-green-600">Yes</span>{% else %}<span class="text-red-600">No</span>{% endif %}</p>
+        <p class="text-lg text-gray-700"><strong>Description:</strong> {{ room.hourly_rate.description }}</p>
+        {% if room.image %}
+            <img src="{{ room.image.url }}" alt="{{ room.name }}" class="mt-4 w-full max-w-md rounded">
+        {% endif %}
+    </div>
+    <div class="mt-6">
+        <a href="{% url 'rent_list' %}" class="text-blue-600 hover:underline">Back to Bike List</a>
+    </div>
+{% endblock %}
