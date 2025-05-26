@@ -129,37 +129,6 @@ myproject/
 
 ===
 
-*Troubleshooting*
-
-- ImportError for CustomSignupForm:
- - Check myapp/allauth_forms.py for CustomSignupForm. Example:
-
-from allauth.account.forms import SignupForm
-
-class CustomSignupForm(SignupForm):
-    def save(self, request):
-        user = super().save(request)
-        return user
-
- - If not used, remove the import from myapp/views.py:
-
-# Remove: from myapp.allauth_forms import CustomSignupForm
-
-
-- Migration Issues:
- - If prompted about renaming fields (e.g., room.name to room.dorm_name), answer y if the field was renamed, or N if it's a new field.
- - For non-nullable fields without defaults (e.g., dorm_name, room_name), ensure default is set in models.py (e.g., default='Unknown').
-- Static Files: Ensure STATICFILES_DIRS is configured in settings.py:
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
-Run collectstatic for production.
-
-- Image Uploads: Install Pillow (pip install pillow) for ImageField in the Room model.
-
-===
-
 *Contributing*
 
 1. Fork the repository.
