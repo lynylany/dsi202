@@ -6,6 +6,18 @@ Imagine a motorcycle taxi driver, working tirelessly through busy city streets, 
 
 ---
 
+## UX/UI Design
+
+To ensure the Rent Near Website & Application meets the needs of its users, we followed a user-centered design process:
+
+- User Research: Conducted interviews with motorcycle taxi drivers, students, and other potential tenants to understand their pain points, such as difficulty finding affordable dorms near workplaces or campuses.
+- Personas: Created user personas, including a motorcycle taxi driver needing quick access to nearby dorms and a student prioritizing budget-friendly options with essential amenities.
+- Wireframes: Designed wireframes to map out intuitive navigation, allowing users to filter rooms by location, price, and amenities (e.g., beds, air conditioning).
+- Prototypes: Developed interactive prototypes to test the booking flow, ensuring tenants can easily select check-in/check-out dates and landlords can manage listings efficiently.
+- UI Design: Crafted a clean, responsive interface with Django templates, using a minimalistic design to highlight room images (e.g., via logo.svg or room photos) and clear call-to-action buttons for booking and reviews.
+
+---
+
 ## Features
 
 - User Roles:
