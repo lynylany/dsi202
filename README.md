@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **Dormitory Booking System**
 *Overview*
 Imagine a motorcycle taxi driver, working tirelessly through busy city streets, dreaming of a comfortable and affordable place to live near their workplace. They need a dormitory with complete furniture—beds, tables, air conditioning—at a price that fits their budget. Yet, their search is met with frustration: available dorms are either too expensive or lack the essential amenities they need. Inspired by this struggle, we created the Dormitory Booking System, a web application designed to help motorcycle taxi drivers, students, and people of all ages and backgrounds find affordable, well-furnished dormitories close to their desired locations. Our platform simplifies the search for quality housing, ensuring everyone can find a place that feels like home without breaking the bank.
@@ -48,24 +49,33 @@ cd myproject
 
 
 b. Create a Virtual Environment:
+=======
+
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 
+<<<<<<< HEAD
 c. Install Dependencies:
 pip install -r requirements.txt
 
 Note: Ensure requirements.txt includes the following:
+=======
+
 django>=4.0
 python-dateutil>=2.8
 pillow>=9.0
 
 
+<<<<<<< HEAD
 d. Apply Migrations:
+=======
+
 python manage.py makemigrations
 python manage.py migrate
 
 
+<<<<<<< HEAD
 e. Create a Superuser (for admin access):
 python manage.py createsuperuser
 
@@ -75,13 +85,17 @@ python manage.py collectstatic
 
 
 g. Run the Development Server:
+=======
 python manage.py runserver
 
 Access the application at http://localhost:8000.
 
+<<<<<<< HEAD
 ---
 
 *Project Structure*
+
+=======
 
 myproject/
 ├── myapp/
@@ -100,6 +114,7 @@ myproject/
 ├── manage.py
 └── README.md
 
+<<<<<<< HEAD
 ---
 
 *Usage*
@@ -172,3 +187,5 @@ This project is licensed under the MIT License.
 
 *Contact*
 For issues or suggestions, please open an issue on the repository (https://github.com/lynylany/dsi202_2025) or contact the project maintainer.
+=======
+Usage
