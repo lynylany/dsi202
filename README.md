@@ -4,9 +4,9 @@
 
 Imagine a motorcycle taxi driver, working tirelessly through busy city streets, dreaming of a comfortable and affordable place to live near their workplace. They need a dormitory with complete furniture—beds, tables, air conditioning—at a price that fits their budget. Yet, their search is met with frustration: available dorms are either too expensive or lack the essential amenities they need. Inspired by this struggle, we created Rent Near Application, a web application designed to help motorcycle taxi drivers, students, and people of all ages and backgrounds find affordable, well-furnished dormitories close to their desired locations. Our platform simplifies the search for quality housing, ensuring everyone can find a place that feels like home without breaking the bank.
 
-===
+---
 
-*Features*
+## Features
 
 - User Roles:
 1. Tenants: Browse rooms, make bookings, leave reviews, and specify preferences.
@@ -16,9 +16,9 @@ Imagine a motorcycle taxi driver, working tirelessly through busy city streets, 
 - Reviews: Tenants can rate rooms (1-5 stars) and provide feedback on comfort and cleanliness.
 - Custom User Authentication: Extends Django's AbstractUser with roles (Tenant or Landlord) and additional fields like phone number.
 
-===
+---
 
-*Technologies Used*
+## Technologies Used
 
 - Backend: Django 4.x, Python 3.13
 - Database: SQLite (default, configurable to others like PostgreSQL)
@@ -26,9 +26,9 @@ Imagine a motorcycle taxi driver, working tirelessly through busy city streets, 
 - Static Files: Supports images (e.g., room images, logo.svg) and other assets
 - Image Processing: Pillow for handling image uploads
 
-===
+---
 
-*Installation*
+## Installation
 
 - Prerequisites
  - Python 3.13 or higher
@@ -40,19 +40,19 @@ Imagine a motorcycle taxi driver, working tirelessly through busy city streets, 
 
 1. Clone the Repository:
 
-git clone https://github.com/lynylany/dsi202_2025.git
-cd myproject
+*git clone https://github.com/lynylany/dsi202_2025.git
+cd myproject*
 
 2. Create a Virtual Environment:
 
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+*python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate*
 
 3. Install Dependencies:
 
-pip install -r requirements.txt
+*pip install -r requirements.txt*
 
-Note: Ensure requirements.txt includes:
+**Note**: Ensure requirements.txt includes:
 
 django>=4.0
 python-dateutil>=2.8
@@ -61,29 +61,27 @@ pillow>=9.0
 
 4. Apply Migrations:
 
-python manage.py makemigrations
-python manage.py migrate
+*python manage.py makemigrations
+python manage.py migrate*
 
 
 5. Create a Superuser (for admin access):
 
-python manage.py createsuperuser
-
+*python manage.py createsuperuser*
 
 6. Collect Static Files (if needed):
 
-python manage.py collectstatic
-
+*python manage.py collectstatic*
 
 7. Run the Development Server:
 
-python manage.py runserver
+*python manage.py runserver*
 
 Access the application at http://localhost:8000.
 
-===
+---
 
-*Project Structure*
+## Project Structure
 
 myproject/
 ├── myapp/
@@ -102,9 +100,9 @@ myproject/
 ├── manage.py
 └── README.md
 
-===
+---
 
-*Usage*
+## Usage
 
 - Admin Panel: Access at /admin to manage users, rooms, bookings, and reviews.
 - Tenant Features:
@@ -116,9 +114,9 @@ myproject/
  - View and manage bookings, including confirming or canceling.
 - Static Files: Place images (e.g., logo.svg, room images) in myapp/static/images/ and reference them in templates using {% load static %} and {% static 'images/logo.svg' %}.
 
-===
+---
 
-*Database Models*
+## Database Models
 
 - CustomUser: Extends Django's AbstractUser with phone and role (Tenant or Landlord).
 - Tenant: Stores tenant-specific data like budget and preferences.
@@ -127,19 +125,19 @@ myproject/
 - Booking: Manages room bookings with status and date validation.
 - Review: Allows tenants to rate and comment on rooms.
 
-===
+---
 
-*Troubleshooting*
+## Troubleshooting
 
 1. ImportError for CustomSignupForm:
 - Check myapp/allauth_forms.py for CustomSignupForm. Example:
   
-from allauth.account.forms import SignupForm
+*from allauth.account.forms import SignupForm*
 
-class CustomSignupForm(SignupForm):
+*class CustomSignupForm(SignupForm):
     def save(self, request):
         user = super().save(request)
-        return user
+        return user*
 
 - If not used, remove the import from myapp/views.py:
 Remove: from myapp.allauth_forms import CustomSignupForm
@@ -151,16 +149,16 @@ Remove: from myapp.allauth_forms import CustomSignupForm
   
 3. Static Files: Ensure STATICFILES_DIRS is configured in settings.py:
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+*STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]*
 
 Run collectstatic for production.
 
 4. Image Uploads: Install Pillow (pip install pillow) foe ImageField in the Room model.
 
-===
+---
 
-*Contributing*
+## Contributing
 
 1. Fork the repository.
 2. Create a feature branch (git checkout -b feature/YourFeature).
@@ -168,14 +166,14 @@ Run collectstatic for production.
 4. Push to the branch (git push origin feature/YourFeature).
 5. Open a pull request.
 
-===
+---
 
-*License*
+## License
 
 This project is licensed under the MIT License.
 
 ===
 
-*Contact*
+## Contact
 
 For issues or suggestions, please open an issue on the repository (https://github.com/lynylany/dsi202_2025) or contact the project maintainer.
