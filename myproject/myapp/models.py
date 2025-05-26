@@ -49,7 +49,7 @@ class Landlord(models.Model):
 class Room(models.Model):
     landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE, related_name='rooms', null=True, blank=True) 
     dorm_name = models.CharField(max_length=255)
-    room_name = models.CharField(max_length=255)
+    room_name = models.CharField(max_length=255, default='')
     image = models.ImageField(upload_to='room_images/', blank=True, null=True) 
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=255)
