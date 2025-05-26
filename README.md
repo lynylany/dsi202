@@ -1,8 +1,8 @@
-**Dormitory Booking System**
+**Rent Near Website & Application**
 
 *Overview*
 
-Imagine a motorcycle taxi driver, working tirelessly through busy city streets, dreaming of a comfortable and affordable place to live near their workplace. They need a dormitory with complete furniture—beds, tables, air conditioning—at a price that fits their budget. Yet, their search is met with frustration: available dorms are either too expensive or lack the essential amenities they need. Inspired by this struggle, we created the Dormitory Booking System, a web application designed to help motorcycle taxi drivers, students, and people of all ages and backgrounds find affordable, well-furnished dormitories close to their desired locations. Our platform simplifies the search for quality housing, ensuring everyone can find a place that feels like home without breaking the bank.
+Imagine a motorcycle taxi driver, working tirelessly through busy city streets, dreaming of a comfortable and affordable place to live near their workplace. They need a dormitory with complete furniture—beds, tables, air conditioning—at a price that fits their budget. Yet, their search is met with frustration: available dorms are either too expensive or lack the essential amenities they need. Inspired by this struggle, we created Rent Near Application, a web application designed to help motorcycle taxi drivers, students, and people of all ages and backgrounds find affordable, well-furnished dormitories close to their desired locations. Our platform simplifies the search for quality housing, ensuring everyone can find a place that feels like home without breaking the bank.
 
 ===
 
