@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% load widget_tweaks %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block content %}
+<section class="relative w-full min-h-screen bg-cover bg-center"
+         style="background-image: url('{% static 'image/hero1.jpg' %}');">
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+
+    <div class="relative z-10 flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md bg-white/95 rounded-2xl shadow-lg border border-gray-100 p-8"
+             data-aos="fade-up" data-aos-duration="800">
+            <!-- Logo -->
+            <!-- <div class="flex justify-center mb-6">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'image/logopng.png' %}" alt="Rent Near Logo"
+                         class="h-20 transition duration-200 hover:scale-105">
+                </a>
+            </div> -->
+
+            <!-- Title -->
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6"
+                style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                Join Rent Near
+            </h2>
+
+            <!-- Sign-up Form -->
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name != "role" %}
+                <div data-aos="fade-up" data-aos-delay="200">
+                    {{ field|add_class:"w-full px-4 py-2 rounded-full border border-gray-200 bg-[#f8f9fa] text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4285f4] transition shadow-sm text-sm" }}
+                    {% if field.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endfor %}
+
+                <!-- Role Selection -->
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <p class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2"
+                       style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                        Select Role
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {% for value, label in form.role.field.choices %}
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="radio" name="role" value="{{ value }}"
+                                   class="h-4 w-4 text-[#4285f4] border-gray-300 focus:ring-2 focus:ring-[#4285f4]"
+                                   {% if form.role.value == value %}checked{% endif %}>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
+                                    <i class="fas {% if value == 'tenant' %}fa-user{% else %}fa-home{% endif %} text-[#4285f4] text-base"></i>
+                                </div>
+                                <span class="text-sm text-gray-800"
+                                      style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                                    {{ label }}
+                                </span>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+                    {% if form.role.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.role.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <button type="submit"
+                        class="w-full px-6 py-2 bg-[#4285f4] hover:bg-blue-600 text-white rounded-3xl font-semibold text-sm transition duration-300"
+                        style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                    Sign Up
+                </button>
+            </form>
+
+            <!-- Google Sign-up -->
+            <a href="{% provider_login_url 'google' %}"
+               class="w-full mt-4 px-6 py-2 bg-[#4285f4] hover:bg-blue-600 text-white rounded-3xl font-semibold text-sm transition duration-300 flex items-center justify-center space-x-2"
+               style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                <i class="fab fa-google text-white text-base"></i>
+                <span>Sign Up with Google</span>
+            </a>
+
+            <!-- Links -->
+            <div class="mt-4 text-center text-sm text-gray-600 space-y-2">
+                <p style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                    Already have an account?
+                    <a href="{% url 'account_login' %}" class="text-[#4285f4] hover:underline">Sign in</a>
+                </p>
+                <p style="font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+                    <a href="{% url 'account_reset_password' %}" class="text-[#4285f4] hover:underline">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+</script>
+{% endblock %}
