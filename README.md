@@ -172,7 +172,7 @@ Run collectstatic for production.
 
 This project is licensed under the MIT License.
 
-===
+---
 
 ## Contact
 
