@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Room Rental System{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100..900&family=Prompt:wght@100;400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+
+
+    {% block extra_head %}{% endblock %}
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-[#f8f9fa] font-sans">
+
+    <!-- Header -->
+    <header class="relative flex items-center justify-between p-4 bg-white shadow-sm" style="height: 85px;">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'image/logo.svg' %}" alt="Rent Near Logo" class="h-16 object-contain"
+                style="margin-left: 20px; margin-top: 25px;">
+        </a>
+
+        <!-- Hamburger for mobile -->
+        <div class="lg:hidden absolute top-7 right-10 z-20">
+            <button id="hamburger-icon" class="text-gray-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex absolute top-5 right-10 z-10">
+            <ul class="flex space-x-6 px-6 py-3  rounded-md">
+                <li>
+                    <a href="{% url 'home' %}"
+                        class="px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-600 transition duration-300 {% if request.path == '/' %}border-b-2 border-blue-600{% endif %}">
+                        Home
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'profile' %}"
+                        class="px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-600 transition duration-300 {% if request.path == '/profile/' %}border-b-2 border-blue-600{% endif %}">
+                        Profile
+                    </a>
+                </li>
+                {% if user.role == 'tenant' %}
+                {% endif %}
+                {% if user.role == 'landlord' %}
+                <li>
+                    <a href="{% url 'room_create' %}"
+                        class="px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-600 transition duration-300 {% if request.path == '/room_create/' %}border-b-2 border-blue-600{% endif %}">
+                        Add Room
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'account_logout' %}"
+                        class="px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-600 transition duration-300 {% if request.path == '/accounts/logout/' %}border-b-2 border-blue-600{% endif %}">
+                        Logout
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'account_login' %}"
+                        class="px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-600 transition duration-300 {% if request.path == '/accounts/login/' %}border-b-2 border-blue-600{% endif %}">
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'account_signup' %}"
+                        class="px-4 py-2 text-base font-medium text-gray-600 hover:text-blue-600 transition duration-300 {% if request.path == '/accounts/signup/' %}border-b-2 border-blue-600{% endif %}">
+                        Sign Up
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobile-menu"
+            class="lg:hidden fixed top-0 right-0 w-64 h-full bg-white/95 backdrop-blur-sm z-50 transform translate-x-full shadow-lg transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full p-6">
+                <!-- Close Button -->
+                <button id="close-menu" class="self-start text-gray-600 hover:text-blue-600 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <!-- Navigation Links -->
+                <ul class="flex flex-col space-y-4">
+                    <li>
+                        <a href="{% url 'home' %}"
+                            class="text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profile' %}"
+                            class="text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5.121 17.07A7.003 7.003 0 0112 15c2.54 0 4.83.879 6.879 2.07M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    {% if user.role == 'tenant' %}
+                    <li>
+                        <a href="{% url 'apply_landlord' %}"
+                            class="text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1h16v-1c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                            <span>Apply Landlord</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if user.role == 'landlord' %}
+                    <li>
+                        <a href="{% url 'room_create' %}"
+                            class="text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            <span>Add Room</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'account_logout' %}"
+                            class="text-gray-600 hover:text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'account_login' %}"
+                            class="text-gray-600 hover:text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Login</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_signup' %}"
+                            class="text-gray-600 hover:text-green-600 hover:bg-green-50 px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M18 9v3m0 0v3m0-3h3m-3 0H9m9 0a3 3 0 01-3 3H9a3 3 0 01-3-3H6a3 3 0 00-3 3v3a3 3 0 003 3h12a3 3 0 003-3v-3a3 3 0 00-3-3z" />
+                            </svg>
+                            <span>Sign Up</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content block -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 text-gray-600 text-sm py-4 ">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'image/logo.svg' %}" alt="Rent Near Logo" class="h-16 object-contain"
+                    style="margin-left: 20px;">
+            </a>
+            <!-- Links -->
+            <div class="flex flex-col md:flex-row gap-2 md:gap-6 mb-2 md:mb-0" style="margin-right: 65px;">
+                <a href="#" class="hover:text-blue-600 transition">Privacy</a>
+                <a href="#" class="hover:text-blue-600 transition">Terms</a>
+                <a href="#" class="hover:text-blue-600 transition">Send feedback</a>
+                <a href="#" class="hover:text-blue-600 transition">About</a>
+                <a href="#" class="hover:text-blue-600 transition">Help</a>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const languageSelector = document.getElementById('language-selector');
+
+        // ตรวจสอบว่า DOM elements มีอยู่จริง
+        if (hamburgerIcon && mobileMenu && closeMenu) {
+            let isMenuOpen = false;
+
+            hamburgerIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                mobileMenu.classList.remove('translate-x-full');
+                isMenuOpen = true;
+            });
+
+            closeMenu.addEventListener('click', (event) => {
+                event.stopPropagation();
+                mobileMenu.classList.add('translate-x-full');
+                isMenuOpen = false;
+            });
+
+            document.addEventListener('click', (event) => {
+                if (isMenuOpen && !mobileMenu.contains(event.target) && event.target !== hamburgerIcon) {
+                    mobileMenu.classList.add('translate-x-full');
+                    isMenuOpen = false;
+                }
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                    isMenuOpen = false;
+                });
+            });
+        }
+
+        // การจัดการ Language Selector
+        if (languageSelector) {
+            languageSelector.addEventListener('change', (event) => {
+                const selectedLanguage = event.target.value;
+                console.log(`Selected language: ${selectedLanguage}`);
+                // ตัวอย่าง: เปลี่ยนภาษาของหน้าเว็บ
+                // คุณสามารถเพิ่มโค้ดเพื่อเปลี่ยนภาษาของหน้าเว็บที่นี่
+                // เช่น ส่งค่าไปยัง backend หรือเปลี่ยน locale
+            });
+        }
+    </script>
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+
+</html>
