@@ -1,10 +1,13 @@
 # Rent Near TU
+
 ## Abstract
+
 Dormitories are essential for quality of life, yet students, workers, and low-to-middle-income families near Thammasat University’s Rangsit Campus face barriers in finding affordable, suitable housing. Fragmented systems and inefficient methods, like physical visits or word-of-mouth, often waste time and money. **Rent Near TU**, a Django-based web application, addresses this gap by providing a centralized platform for tenants (students, workers) and landlords (property managers). With budget-based search, advanced filtering by amenities and location, multimedia-rich listings, and real-time management tools, it simplifies dormitory searches, reduces access disparities, and supports educational and professional opportunities. Its scalable design offers potential for broader community applications.
 
 ---
 
 ## User Stories
+
 The following user stories reflect key usage scenarios:
 
 1. **As a Thammasat University student**, I want to find a budget-friendly dormitory near campus with amenities like air conditioning and Wi-Fi, so I can focus on my studies without financial strain.
@@ -14,24 +17,25 @@ The following user stories reflect key usage scenarios:
 ---
 
 ## Usage Scenarios
+
 Rent Near TU supports these user stories through tailored workflows:
 
 - **Thammasat University Student**:
- - **Search**: Filter dorms by proximity to campus, price, and amenities (e.g., Wi-Fi, air conditioning) on the room browsing page.
- - **Book**: Select a room, enter check-in/check-out dates, and provide details (name, phone, email) via the booking form.
- - **Review**: Post-stay, submit a 1-5 star rating and feedback on cleanliness and comfort.
+   - **Search**: Filter dorms by proximity to campus, price, and amenities (e.g., Wi-Fi, air conditioning) on the room browsing page.
+   - **Book**: Select a room, enter check-in/check-out dates, and provide details (name, phone, email) via the booking form.
+   - **Review**: Post-stay, submit a 1-5 star rating and feedback on cleanliness and comfort.
 
 
 - **Worker near Rangsit**:
- - **Filter**: Browse dorms by workplace proximity, furniture availability (e.g., beds, tables), and lease flexibility.
- - **Book**: Confirm a booking with real-time availability checks and status updates (pending, confirmed).
- - **Preferences**: Update tenant profile with budget and furniture needs for tailored suggestions.
+   - **Filter**: Browse dorms by workplace proximity, furniture availability (e.g., beds, tables), and lease flexibility.
+   - **Book**: Confirm a booking with real-time availability checks and status updates (pending, confirmed).
+   - **Preferences**: Update tenant profile with budget and furniture needs for tailored suggestions.
 
 
 - **Landlord**:
- - **List Rooms**: Create/edit listings via the landlord dashboard, adding dorm_name, price, location, and images.
- - **Manage Bookings**: Approve or cancel bookings, with automatic availability updates.
- - **View Reviews**: Monitor tenant feedback to enhance listings.
+   - **List Rooms**: Create/edit listings via the landlord dashboard, adding `dorm_name`, `price`, `location`, and images.
+   - **Manage Bookings**: Approve or cancel bookings, with automatic availability updates.
+   - **View Reviews**: Monitor tenant feedback to enhance listings.
 
 ---
 
@@ -40,22 +44,21 @@ A user-centered design process ensures usability:
 
 - **User Research**: Interviewed students and workers to identify challenges, like fragmented dormitory information and high search costs.
 - **Personas**: Developed personas, including a student prioritizing affordability and a worker needing proximity to Rangsit.
-- **Wireframes**: Created layouts for intuitive navigation, with filters for location, price, and amenities.
+- **Wireframes**: Created layouts for intuitive navigation, with filters for `location`, `price`, and amenities.
 - **Prototypes**: Tested booking and listing flows to ensure ease of use for tenants and landlords.
-- **UI Design**: Designed a responsive Django template interface, emphasizing room images (via Images or logo.svg) and clear call-to-action buttons.
+- **UI Design**: Designed a responsive Django template interface, emphasizing room images (via `Images` or `logo.svg`) and clear call-to-action buttons.
 
 ---
 
 # Features
 
 - **User Roles**:
- - **Tenants**: Browse, book, review, and set preferences.
- - **Landlords**: Manage listings (price, amenities, images).
-
-- **Room Management**: Create/edit listings with dorm_name, room_name, price, location, amenities (bed_count, aircon_count), and Images.
-- **Booking System**: Book with check-in/check-out dates, track status, and manage availability.
+   - **Tenants**: Browse, book, review, and set preferences.
+   - **Landlords**: Manage listings (price, amenities, images).
+- **Room Management**: Create/edit listings with `dorm_name`, `room_name`, `price`, `location`, amenities (`bed_count`, `aircon_count`), and `Images`.
+- **Booking System**: Book with check-in/check-out dates, track `status`, and manage availability.
 - **Reviews**: Rate rooms (1-5 stars) with comments.
-Custom Authentication: Extends AbstractUser with phone and role.
+Custom Authentication: Extends `AbstractUser` with `phone` and `role`.
 
 ---
 
@@ -64,62 +67,83 @@ Custom Authentication: Extends AbstractUser with phone and role.
 - **Backend**: Django 4.x, Python 3.13
 - **Database**: SQLite (configurable to PostgreSQL)
 - **Frontend**: Django templates (extendable with CSS, JavaScript, images)
-- **Static Files**: Supports images (e.g., logo.svg, room photos)
-- **Image Processing**: Pillow for ImageField
+- **Static Files**: Supports images (e.g., `logo.svg`, room photos)
+- **Image Processing**: Pillow for `ImageField`
 
 ---
 
 # Installation
 
-**Prerequisites**
+### Prerequisites
 
 - Python 3.13+
 - pip
 - Virtualenv (recommended)
 - Git
-- Pillow (for ImageField)
+- Pillow (for `ImageField`)
 
-**Setup Instructions**
+### Setup Instructions
 
-1. Clone the Repository:
+1. **Clone the Repository**:
 
-===
-*git clone https://github.com/lynylany/dsi202_2025.git
-cd myproject*
-===
+```bash
+git clone https://github.com/lynylany/dsi202_2025.git
+cd myproject
+```
 
-3. Create a Virtual Environment:
+2. **Create a Virtual Environment**:
 
-*python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate*
+```bash
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+```
 
+3. **Install Dependencies**:
 
-3. Install Dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-*pip install -r requirements.txt*
+*Note*: Ensure `requirements.txt` includes:
 
-Note: Ensure requirements.txt includes:
-
-*django>=4.0
+```text
+django>=4.0
 python-dateutil>=2.8
-pillow>=9.0*
+pillow>=9.0
+```
 
+4. **Apply Migrations**:
 
-Apply Migrations:python manage.py makemigrations
+```bash
+python manage.py makemigrations
 python manage.py migrate
+```
 
+5. **Create a Superuser**:
 
-Create a Superuser:python manage.py createsuperuser
+```bash
+python manage.py createsuperuser
+```
 
+6. **Collect Static Files**:
 
-Collect Static Files:python manage.py collectstatic
+```bash
+python manage.py collectstatic
+```
 
+7. **Run the Server**:
 
-Run the Server:python manage.py runserver
+```bash
+python manage.py runserver
+```
 
-Access at http://localhost:8000.
+Access at `http://localhost:8000`.
 
-Project Structure
+---
+
+## Project Structure
+
+```plain
 myproject/
 ├── myapp/
 │   ├── migrations/
@@ -136,72 +160,87 @@ myproject/
 │   ├── urls.py
 ├── manage.py
 └── README.md
+```
 
-Usage
+---
 
-Admin Panel: Access /admin to manage users, rooms, bookings, reviews.
-Tenants:
-Filter rooms by location, price, amenities.
-Book with check-in/check-out dates and guest details.
-Submit reviews with ratings/comments.
+## Usage
 
-
-Landlords:
-Add/edit listings with price, amenities, images.
-Manage bookings and view reviews.
+- **Admin Panel**: Access `/admin` to manage users, rooms, bookings, reviews.
+- **Tenants**:
+   - Filter rooms by `location`, `price`, amenities.
+   - Book with check-in/check-out dates and guest details.
+   - Submit reviews with ratings/comments.
 
 
-Static Files: Store images in myapp/static/images/ and use {% load static %} with {% static 'images/logo.svg' %}.
+- **Landlords**:
+   - Add/edit listings with `price`, amenities, images.
+   - Manage bookings and view reviews.
 
-Database Models
+- **Static Files**: Store images in `myapp/static/images/` and use `{% load static %}` with {% s`tatic 'images/logo.svg' %}`.
 
-CustomUser: Extends AbstractUser with phone, role.
-Tenant: Stores budget, preferences.
-Landlord: Includes dorm_name, address, bank details.
-Room: Has dorm_name, room_name, price, location, bed_count, aircon_count, Images.
-Booking: Manages check_in, check_out, status.
-Review: Stores ratings, comments.
+---
 
-Troubleshooting
+## Database Models
 
-ImportError for CustomSignupForm:
-Verify myapp/allauth_forms.py:from allauth.account.forms import SignupForm
+- **CustomUser**: Extends `AbstractUser` with `phone`, `role`.
+- **Tenant**: Stores `budget`, `preferences`.
+- **Landlord**: Includes `dorm_name`, `address`, bank details.
+- **Room**: Has `dorm_name`, `room_name`, `price`, `location`, `bed_count`, `aircon_count`, `Images`.
+- **Booking**: Manages `check_in`, `check_out`, `status`.
+- **Review**: Stores ratings, comments.
+
+---
+
+## Troubleshooting
+
+- **ImportError for CustomSignupForm**:
+  - Verify `myapp/allauth_forms.py`:
+
+```python
+from allauth.account.forms import SignupForm
 
 class CustomSignupForm(SignupForm):
     def save(self, request):
         user = super().save(request)
         return user
+```
+
+  - Or remove from `myapp/views.py`:
+
+```python
+# Remove: from myapp.allauth_forms import CustomSignupForm
+```
+
+- **Migration Issues**:
+  - For renamed fields (e.g., `room.name` to `room.dorm_name`), answer `y` or `N`.
+  - Add `default` in `models.py` (e.g., `default='Unknown'`).
 
 
-Or remove from myapp/views.py:# Remove: from myapp.allauth_forms import CustomSignupForm
+- **Static Files**:
+  - Configure `settings.py`:
 
-
-
-
-Migration Issues:
-For renamed fields (e.g., room.name to room.dorm_name), answer y or N.
-Add default in models.py (e.g., default='Unknown').
-
-
-Static Files:
-Configure settings.py:STATIC_URL = '/static/'
+```python
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+```
 
+  - Run `collectstatic`.
 
-Run collectstatic.
+- **Image Uploads: Install Pillow** (`pip install pillow`).
 
+---
 
-Image Uploads: Install Pillow (pip install pillow).
+## Contributing
 
-Contributing
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/YourFeature`).
+3. Commit changes (`git commit -m 'Add YourFeature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
 
-Fork the repository.
-Create a feature branch (git checkout -b feature/YourFeature).
-Commit changes (git commit -m 'Add YourFeature').
-Push to the branch (git push origin feature/YourFeature).
-Open a pull request.
+---
 
-License
-MIT License
-Contact
-For issues, open a ticket at https://github.com/lynylany/dsi202_2025 or contact the maintainer.
+## Contact
+
+For issues, open a ticket at `https://github.com/lynylany/dsi202_2025` or contact the maintainer.
