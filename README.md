@@ -6,6 +6,14 @@ Dormitories are essential for quality of life, yet students, workers, and low-to
 
 ---
 
+## Demo Video
+
+Watch our YouTube video to see Rent Near TU in action, showcasing how students, workers, and landlords use the platform: "https://youtu.be/3xOHowoUYAo?si=SKnFD9qQQDiwgi8u"
+
+Watch the Demo
+
+---
+
 ## User Stories
 
 The following user stories reflect key usage scenarios:
