@@ -1,102 +1,149 @@
-<<<<<<< HEAD
-**Dormitory Booking System**
-*Overview*
-Imagine a motorcycle taxi driver, working tirelessly through busy city streets, dreaming of a comfortable and affordable place to live near their workplace. They need a dormitory with complete furniture—beds, tables, air conditioning—at a price that fits their budget. Yet, their search is met with frustration: available dorms are either too expensive or lack the essential amenities they need. Inspired by this struggle, we created the Dormitory Booking System, a web application designed to help motorcycle taxi drivers, students, and people of all ages and backgrounds find affordable, well-furnished dormitories close to their desired locations. Our platform simplifies the search for quality housing, ensuring everyone can find a place that feels like home without breaking the bank.
+# Rent Near TU
+
+## Abstract
+
+Dormitories are essential for quality of life, yet students, workers, and low-to-middle-income families near Thammasat University’s Rangsit Campus face barriers in finding affordable, suitable housing. Fragmented systems and inefficient methods, like physical visits or word-of-mouth, often waste time and money. **Rent Near TU**, a Django-based web application, addresses this gap by providing a centralized platform for tenants (students, workers) and landlords (property managers). With budget-based search, advanced filtering by amenities and location, multimedia-rich listings, and real-time management tools, it simplifies dormitory searches, reduces access disparities, and supports educational and professional opportunities. Its scalable design offers potential for broader community applications.
 
 ---
 
-*Features*
+## User Stories
 
-- User Roles:
-1. Tenants: Browse rooms, make bookings, leave reviews, and upload preferences.
-2. Landlords: Manage room listings, including details like price, amenities, location, and images.
+The following user stories reflect key usage scenarios:
 
-- Room Management: Create and edit room listings with details such as dorm name, room name, price, location, and amenities (e.g., beds, air conditioners, tables). Supports image uploads for room visualization.
-
-- Booking System: Book rooms with check-in/check-out dates, track booking status (pending, confirmed, canceled), and manage room availability automatically.
-
-- Reviews: Tenants can rate rooms (1-5 stars) and provide feedback on comfort and cleanliness.
-
-- Custom User Authentication: Extends Django's AbstractUser with roles (Tenant or Landlord) and additional fields like phone number.
+1. **As a Thammasat University student**, I want to find a budget-friendly dormitory near campus with amenities like air conditioning and Wi-Fi, so I can focus on my studies without financial strain.
+2. **As a worker near Rangsit**, I want to search for a dormitory close to my workplace with complete furniture and flexible lease terms, so I can save commuting time and live comfortably.
+3. **As a landlord**, I want to list my dormitory rooms with photos and detailed descriptions, so I can attract reliable tenants and manage bookings efficiently.
 
 ---
 
-*Technologies Used*
+## Usage Scenarios
 
-- Backend: Django 4.x, Python 3.13
-- Database: SQLite (default, configurable to others like PostgreSQL)
-- Frontend: Django templates (extendable with static files like CSS, JavaScript, and images)
-- Static Files: Supports images (e.g., room images, logo.svg) and other assets
-- Image Processing: Pillow for handling image uploads
+Rent Near TU supports these user stories through tailored workflows:
+
+- **Thammasat University Student**:
+   - **Search**: Filter dorms by proximity to campus, price, and amenities (e.g., Wi-Fi, air conditioning) on the room browsing page.
+   - **Book**: Select a room, enter check-in/check-out dates, and provide details (name, phone, email) via the booking form.
+   - **Review**: Post-stay, submit a 1-5 star rating and feedback on cleanliness and comfort.
+
+
+- **Worker near Rangsit**:
+   - **Filter**: Browse dorms by workplace proximity, furniture availability (e.g., beds, tables), and lease flexibility.
+   - **Book**: Confirm a booking with real-time availability checks and status updates (pending, confirmed).
+   - **Preferences**: Update tenant profile with budget and furniture needs for tailored suggestions.
+
+
+- **Landlord**:
+   - **List Rooms**: Create/edit listings via the landlord dashboard, adding `dorm_name`, `price`, `location`, and images.
+   - **Manage Bookings**: Approve or cancel bookings, with automatic availability updates.
+   - **View Reviews**: Monitor tenant feedback to enhance listings.
 
 ---
 
-*Installation*
+# UX/UI Design
+A user-centered design process ensures usability:
 
-1. Prerequisites
+- **User Research**: Interviewed students and workers to identify challenges, like fragmented dormitory information and high search costs.
+- **Personas**: Developed personas, including a student prioritizing affordability and a worker needing proximity to Rangsit.
+- **Wireframes**: Created layouts for intuitive navigation, with filters for `location`, `price`, and amenities.
+- **Prototypes**: Tested booking and listing flows to ensure ease of use for tenants and landlords.
+- **UI Design**: Designed a responsive Django template interface, emphasizing room images (via `Images` or `logo.svg`) and clear call-to-action buttons.
 
-- Python 3.13 or higher
-- pip (Python package manager)
+---
+
+# Features
+
+- **User Roles**:
+   - **Tenants**: Browse, book, review, and set preferences.
+   - **Landlords**: Manage listings (price, amenities, images).
+- **Room Management**: Create/edit listings with `dorm_name`, `room_name`, `price`, `location`, amenities (`bed_count`, `aircon_count`), and `Images`.
+- **Booking System**: Book with check-in/check-out dates, track `status`, and manage availability.
+- **Reviews**: Rate rooms (1-5 stars) with comments.
+Custom Authentication: Extends `AbstractUser` with `phone` and `role`.
+
+---
+
+# Technologies Used
+
+- **Backend**: Django 4.x, Python 3.13
+- **Database**: SQLite (configurable to PostgreSQL)
+- **Frontend**: Django templates (extendable with CSS, JavaScript, images)
+- **Static Files**: Supports images (e.g., `logo.svg`, room photos)
+- **Image Processing**: Pillow for `ImageField`
+
+---
+
+# Installation
+
+### Prerequisites
+
+- Python 3.13+
+- pip
 - Virtualenv (recommended)
 - Git
+- Pillow (for `ImageField`)
 
+### Setup Instructions
 
-2. Setup Instructions
+1. **Clone the Repository**:
 
-a. Clone the Repository:
+```bash
 git clone https://github.com/lynylany/dsi202_2025.git
 cd myproject
+```
 
+2. **Create a Virtual Environment**:
 
-b. Create a Virtual Environment:
-=======
-
+```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
+```
 
+3. **Install Dependencies**:
 
-<<<<<<< HEAD
-c. Install Dependencies:
+```bash
 pip install -r requirements.txt
+```
 
-Note: Ensure requirements.txt includes the following:
-=======
+*Note*: Ensure `requirements.txt` includes:
 
+```text
 django>=4.0
 python-dateutil>=2.8
 pillow>=9.0
+```
 
+4. **Apply Migrations**:
 
-<<<<<<< HEAD
-d. Apply Migrations:
-=======
-
+```bash
 python manage.py makemigrations
 python manage.py migrate
+```
 
+5. **Create a Superuser**:
 
-<<<<<<< HEAD
-e. Create a Superuser (for admin access):
+```bash
 python manage.py createsuperuser
+```
 
+6. **Collect Static Files**:
 
-f. Collect Static Files (if needed):
+```bash
 python manage.py collectstatic
+```
 
+7. **Run the Server**:
 
-g. Run the Development Server:
-=======
+```bash
 python manage.py runserver
+```
 
-Access the application at http://localhost:8000.
+Access at `http://localhost:8000`.
 
-<<<<<<< HEAD
 ---
 
-*Project Structure*
+## Project Structure
 
-=======
-
+```plain
 myproject/
 ├── myapp/
 │   ├── migrations/
@@ -113,79 +160,87 @@ myproject/
 │   ├── urls.py
 ├── manage.py
 └── README.md
-
-<<<<<<< HEAD
----
-
-*Usage*
-
-- Admin Panel: Access at /admin to manage users, rooms, bookings, and reviews.
-- Tenant Features:
-Browse available rooms with details and images.
-Book a room by providing check-in/check-out dates or guest details (full name, phone, email).
-Leave reviews with ratings and comments on comfort and cleanliness.
-
-
-- Landlord Features:
-Add/edit room listings with details like price, amenities, location, and upload images (e.g., room photos).
-View and manage bookings, including confirming or canceling.
-
-
-- Static Files: Place images (e.g., logo.svg, room images) in myapp/static/images/ and reference them in templates using {% static 'images/logo.svg' %}.
+```
 
 ---
 
-*Database Models*
+## Usage
 
-- CustomUser: Extends Django's AbstractUser with phone and role (Tenant or Landlord).
-- Tenant: Stores tenant-specific data like budget and preferences.
-- Landlord: Stores landlord details like dorm_name, address, and bank information.
-- Room: Represents a room with details like dorm_name, room_name, price, location, and amenities (e.g., bed_count, aircon_count). Supports image uploads.
-- Booking: Manages room bookings with status and date validation.
-- Review: Allows tenants to rate and comment on rooms.
+- **Admin Panel**: Access `/admin` to manage users, rooms, bookings, reviews.
+- **Tenants**:
+   - Filter rooms by `location`, `price`, amenities.
+   - Book with check-in/check-out dates and guest details.
+   - Submit reviews with ratings/comments.
+
+
+- **Landlords**:
+   - Add/edit listings with `price`, amenities, images.
+   - Manage bookings and view reviews.
+
+- **Static Files**: Store images in `myapp/static/images/` and use `{% load static %}` with {% s`tatic 'images/logo.svg' %}`.
 
 ---
 
-*Troubleshooting*
+## Database Models
 
-- ImportError for CustomSignupForm:
-1. Check myapp/allauth_forms.py for CustomSignupForm. Example:from allauth.account.forms import SignupForm
+- **CustomUser**: Extends `AbstractUser` with `phone`, `role`.
+- **Tenant**: Stores `budget`, `preferences`.
+- **Landlord**: Includes `dorm_name`, `address`, bank details.
+- **Room**: Has `dorm_name`, `room_name`, `price`, `location`, `bed_count`, `aircon_count`, `Images`.
+- **Booking**: Manages `check_in`, `check_out`, `status`.
+- **Review**: Stores ratings, comments.
+
+---
+
+## Troubleshooting
+
+- **ImportError for CustomSignupForm**:
+  - Verify `myapp/allauth_forms.py`:
+
+```python
+from allauth.account.forms import SignupForm
 
 class CustomSignupForm(SignupForm):
     def save(self, request):
         user = super().save(request)
         return user
+```
+
+  - Or remove from `myapp/views.py`:
+
+```python
+# Remove: from myapp.allauth_forms import CustomSignupForm
+```
+
+- **Migration Issues**:
+  - For renamed fields (e.g., `room.name` to `room.dorm_name`), answer `y` or `N`.
+  - Add `default` in `models.py` (e.g., `default='Unknown'`).
 
 
-2. If not used, remove the import from myapp/views.py:# Remove: from myapp.allauth_forms import CustomSignupForm
+- **Static Files**:
+  - Configure `settings.py`:
 
-
-
-
-- Migration Issues:
-If prompted about renaming fields (e.g., room.name to room.dorm_name), answer y if the field was renamed, or N if it's a new field.
-For non-nullable fields without defaults (e.g., dorm_name, room_name), ensure default is set in models.py (e.g., default='Unknown').
-
-
-- Static Files: Ensure STATICFILES_DIRS is configured in settings.py:STATIC_URL = '/static/'
+```python
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+```
 
-Run collectstatic for production.
+  - Run `collectstatic`.
 
-- Image Uploads: Install Pillow (pip install pillow) for ImageField in the Room model.
+- **Image Uploads: Install Pillow** (`pip install pillow`).
 
-*Contributing*
+---
+
+## Contributing
 
 1. Fork the repository.
-2. Create a feature branch (git checkout -b feature/YourFeature).
-3. Commit changes (git commit -m 'Add YourFeature').
-4. Push to the branch (git push origin feature/YourFeature).
+2. Create a feature branch (`git checkout -b feature/YourFeature`).
+3. Commit changes (`git commit -m 'Add YourFeature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
 5. Open a pull request.
 
-*License*
-This project is licensed under the MIT License.
+---
 
-*Contact*
-For issues or suggestions, please open an issue on the repository (https://github.com/lynylany/dsi202_2025) or contact the project maintainer.
-=======
-Usage
+## Contact
+
+For issues, open a ticket at `https://github.com/lynylany/dsi202_2025` or contact the maintainer.
